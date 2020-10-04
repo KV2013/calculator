@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import Btn from "./components/Btn";
 
 function App() {
   return (
@@ -12,98 +13,98 @@ function App() {
       <div id="buttons" className="grid grid-cols-4 grid-rows-5 flex-grow">
         <ul className="grid grid-rows-1 grid-cols-3 text-white col-start-1 col-end-4 gap-y-4">
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-400 text-black">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-400 text-black">
               AC
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-400 text-black">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-400 text-black">
               +/-
-            </div>
+            </Btn>
           </li>
         </ul>
         <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4 text-white ">
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               7
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               8
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               9
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               4
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               5
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               6
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               1
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               2
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               3
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center col-start-1 col-end-3 px-2">
-            <div className="flex justify-start items-center pl-8 w-full h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-start items-center pl-8 w-full h-16 text-4xl rounded-full bg-gray-900">
               0
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-center items-center col-start-3 col-end-4 ">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
               ,
-            </div>
+            </Btn>
           </li>
         </ul>
         <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 text-white ">
           <li className="flex justify-end items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
               &#247;
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-end items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
               &#10005;
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-end items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
               -
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-end items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
               +
-            </div>
+            </Btn>
           </li>
           <li className="flex justify-end items-center">
-            <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
+            <Btn cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-orange-400">
               =
-            </div>
+            </Btn>
           </li>
         </ul>
       </div>
