@@ -25,17 +25,17 @@ function App() {
         <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4 text-white ">
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              1
+              7
             </div>
           </li>
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              2
+              8
             </div>
           </li>
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              3
+              9
             </div>
           </li>
           <li className="flex justify-center items-center">
@@ -55,17 +55,17 @@ function App() {
           </li>
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              7
+              1
             </div>
           </li>
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              8
+              2
             </div>
           </li>
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-900">
-              9
+              3
             </div>
           </li>
           <li className="flex justify-center items-center col-start-1 col-end-3 px-2">
