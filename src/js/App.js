@@ -10,7 +10,7 @@ function App() {
         0
       </div>
       <div id="buttons" className="grid grid-cols-4 grid-rows-5 flex-grow">
-        <ul className="grid grid-rows-1 grid-cols-3 text-white col-start-1 col-end-4 gap-3">
+        <ul className="grid grid-rows-1 grid-cols-3 text-white col-start-1 col-end-4 gap-y-4">
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-gray-400 text-black">
               AC
@@ -22,7 +22,7 @@ function App() {
             </div>
           </li>
         </ul>
-        <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-3 text-white ">
+        <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4 text-white ">
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-gray-900">
               1
@@ -79,7 +79,7 @@ function App() {
             </div>
           </li>
         </ul>
-        <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-3 text-white ">
+        <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 text-white ">
           <li className="flex justify-center items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               &#247;
