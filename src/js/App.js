@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 function App() {
   return (
-    <div className="flex flex-col bg-black w-full h-full p-3 pt-4 lg:h-auto lg:max-w-sm">
+    <div className="flex flex-col bg-black w-full h-full p-6 pt-10 lg:h-auto lg:max-w-sm">
       <div id="history" className="h-16 text-right text-white">
         14-77/2-3000-1175.5=
       </div>
@@ -80,27 +80,27 @@ function App() {
           </li>
         </ul>
         <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 text-white ">
-          <li className="flex justify-center items-center">
+          <li className="flex justify-end items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               &#247;
             </div>
           </li>
-          <li className="flex justify-center items-center">
+          <li className="flex justify-end items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               &#10005;
             </div>
           </li>
-          <li className="flex justify-center items-center">
+          <li className="flex justify-end items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               -
             </div>
           </li>
-          <li className="flex justify-center items-center">
+          <li className="flex justify-end items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               +
             </div>
           </li>
-          <li className="flex justify-center items-center">
+          <li className="flex justify-end items-center">
             <div className="flex justify-center items-center w-16 h-16 rounded-full bg-orange-400">
               =
             </div>
