@@ -5,13 +5,7 @@ import configureStore from "./js/redux/configureStore";
 import App from "./js/App";
 import "./css/main.css";
 
-const initialState = {
-  expressionStack: [],
-  history: [],
-  negativeNumberMode: false,
-};
-
-const store = configureStore(initialState);
+const store = configureStore();
 const wrapper = document.getElementById("container");
 
 ReactDOM.render(

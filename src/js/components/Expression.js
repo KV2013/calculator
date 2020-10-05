@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { parseExpressionStack } from "../expressionStack";
+import { parseExpressionStack } from "../modules/expressionStack";
 
 const Expression = ({ expressionStack }) => {
-  console.log(expressionStack);
   const expressionString = parseExpressionStack(expressionStack);
 
   return (

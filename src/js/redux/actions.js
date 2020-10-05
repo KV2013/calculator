@@ -1,9 +1,11 @@
 export function allClear() {
+  console.log("allClear actioni");
   return {
     type: "ALL_CLEAR",
   };
 }
 
+// TODO: remove
 export function calculateExpression() {
   return {
     type: "CALCULATE_EXPRESSION",
@@ -12,13 +14,13 @@ export function calculateExpression() {
 
 export function enableNegativeNumber() {
   return {
-    type: "ENABLE_NEGATIVE_NUMBER",
+    type: "NEGATIVE_NUMBER_MODE_ENABLED",
   };
 }
 
 export function disableNegativeNumber() {
   return {
-    type: "DISABLE_NEGATIVE_NUMBER",
+    type: "NEGATIVE_NUMBER_MODE_DISABLED",
   };
 }
 
