@@ -1,7 +1,11 @@
 import React from "react";
 
-function Btn({ cname, ...props }) {
-  return <button className={cname}>{props.children}</button>;
+function Btn({ cname, clickHandler, ...props }) {
+  return (
+    <button className={cname} onClick={clickHandler}>
+      {props.children}
+    </button>
+  );
 }
 
 export default Btn;
