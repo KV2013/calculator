@@ -1,4 +1,7 @@
-import { appendInput } from "../modules/expressionStack";
+import {
+  appendInput,
+  applyNegativeNumberMode,
+} from "../modules/expressionStack";
 import { addExpression } from "../modules/expressionHistory";
 
 export const initialState = {
@@ -11,15 +14,9 @@ function rootReducer(state = initialState, action) {
     case "ALL_CLEAR":
       return initialState;
     case "NEGATIVE_NUMBER_MODE_ENABLED":
-      return {
-        ...state,
-        negativeNumberMode: true,
-      };
+      return updateNegativeNumberMode(state, true);
     case "NEGATIVE_NUMBER_MODE_DISABLED":
-      return {
-        ...state,
-        negativeNumberMode: false,
-      };
+      return updateNegativeNumberMode(state, false);
     case "ADD_HISTORY_RECORD":
       const oldHistory = state.history;
       const newHistory = addExpression(oldHistory, action.payload.expression);
@@ -42,6 +39,19 @@ function rootReducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+function updateNegativeNumberMode(state, mode) {
+  const newExpressionStack = applyNegativeNumberMode(
+    state.expressionStack,
+    mode
+  );
+
+  return {
+    ...state,
+    expressionStack: newExpressionStack,
+    negativeNumberMode: mode,
+  };
 }
 
 export default rootReducer;
