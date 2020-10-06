@@ -33,10 +33,6 @@ function appendCalcOperation(stack, input, isNegative) {
   if (stack.length === 0) {
     return stack;
   }
-  if (isNegative && input === CALC_OPERATION_PLUS) {
-    input = CALC_OPERATION_MINUS;
-  }
-
   let prevItem = tail(stack, 1)[0];
 
   if (isCalcOperation(prevItem)) {

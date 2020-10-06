@@ -7,7 +7,7 @@ class CalcNumber {
     if (value === DECIMAL_SIGN) {
       value = "0.";
     }
-    this.value = String(value);
+    this.value = Number(value);
     this.isNegative = Boolean(isNegative);
     this.isCalculated = isCalculated;
   }
@@ -40,7 +40,7 @@ class CalcNumber {
   }
 
   getString() {
-    let strValue = this.isNegative ? `-${this.value}` : this.value;
+    let strValue = this.isNegative ? `-${this.value}` : String(this.value);
     strValue = strValue.replace(".", ",");
     return strValue;
   }
