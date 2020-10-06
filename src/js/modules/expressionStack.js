@@ -191,5 +191,10 @@ export function calculateExpression(stack) {
     calcResult = Number.parseFloat(calcResult);
   }
 
-  return [JSON.stringify(new CalcNumber(calcResult, false))];
+  let isNegative = false;
+  if (Number(calcResult) < 0) {
+    calcResult = Math.abs(calcResult);
+    isNegative = true;
+  }
+  return [JSON.stringify(new CalcNumber(calcResult, isNegative))];
 }
