@@ -11,7 +11,6 @@ const Expression = ({ symbolsPerLine, expressionStack }) => {
       expressionString.slice(-symbolsPerLine),
     ];
   }
-  console.log("EXPRESSION COMPONENT", { expStringArr });
 
   return (
     <div

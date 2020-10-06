@@ -5,8 +5,15 @@ import {
   CALC_OPERATION_DIVISION,
   NEGATIVE_NUMBER_MODE_DISABLED,
   NEGATIVE_NUMBER_MODE_ENABLED,
+  DECIMAL_SIGN,
 } from "../constants";
 import CalcNumber from "./CalcNumber";
+
+function replaceLastItem(stack, newItem) {
+  const newStack = stack.slice(0, stack.length - 1);
+  newStack.push(newItem);
+  return newStack;
+}
 
 function tail(stack, len) {
   const start = stack.length - len;
@@ -30,10 +37,25 @@ function appendCalcOperation(stack, input, isNegative) {
     input = CALC_OPERATION_MINUS;
   }
 
-  if (isCalcOperation(stack[stack.length - 1])) {
+  let prevItem = tail(stack, 1)[0];
+
+  if (isCalcOperation(prevItem)) {
     const newStack = stack.slice(0, stack.length - 1);
     newStack.push(input);
     return newStack;
+  }
+
+  prevItem = JSON.parse(prevItem);
+  const calcNumber = new CalcNumber(prevItem.value, prevItem.isNegative);
+
+  console.log("ExpressionStack Module", {
+    calcNumber_hasEmptyFraction: calcNumber.hasEmptyFraction(),
+    calcNumber,
+  });
+  if (calcNumber.hasEmptyFraction()) {
+    calcNumber.removeFraction();
+    let newStack = replaceLastItem(stack, JSON.stringify(calcNumber));
+    return [...newStack, input];
   }
 
   return [...stack, input];
@@ -55,13 +77,17 @@ function appendNumber(stack, input, isNegative) {
   }
 
   const prevNumber = JSON.parse(stack[stack.length - 1]);
-
   calcNumber = new CalcNumber(prevNumber.value, isNegative);
+
+  if (input === DECIMAL_SIGN && calcNumber.isFloat()) {
+    calcNumber.removeFraction();
+    return replaceLastItem(stack, JSON.stringify(calcNumber));
+  }
+
   calcNumber.append(input);
-  const newStack = stack.slice(0, stack.length - 1);
-  newStack.push(JSON.stringify(calcNumber));
-  return newStack;
+  return replaceLastItem(stack, JSON.stringify(calcNumber));
 }
+
 function isNegativeNumber(item) {
   if (isCalcOperation(item)) {
     return false;
@@ -141,6 +167,7 @@ export function appendInput(stack, input, isNegative) {
   if (isCalcOperation(input)) {
     return appendCalcOperation(stack, input, isNegative);
   }
+
   return appendNumber(stack, input, isNegative);
 }
 

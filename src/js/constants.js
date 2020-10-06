@@ -5,3 +5,4 @@ export const CALC_OPERATION_DIVISION = "DIVISION";
 export const NEGATIVE_NUMBER_MODE_ENABLED = true;
 export const NEGATIVE_NUMBER_MODE_DISABLED = false;
 export const EXPRESSION_SYMBOLS_PER_LINE = 8;
+export const DECIMAL_SIGN = ",";

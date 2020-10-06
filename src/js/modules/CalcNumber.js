@@ -1,7 +1,12 @@
 "use strict";
 
+import { DECIMAL_SIGN } from "../constants";
+
 class CalcNumber {
   constructor(value, isNegative) {
+    if (value === DECIMAL_SIGN) {
+      value = "0.";
+    }
     this.value = String(value);
     this.isNegative = Boolean(isNegative);
   }
@@ -13,7 +18,7 @@ class CalcNumber {
   }
 
   getNumber() {
-    return this.isNegative ? `-${this.value}` : this.value;
+    return this.isNegative ? Number(`-${this.value}`) : Number(this.value);
   }
 
   get val() {
@@ -21,11 +26,14 @@ class CalcNumber {
   }
 
   append(val) {
-    if (val === ",") {
-      this.value = String(this.value).concat("", ".");
-    } else {
-      this.value = String(this.value).concat("", val);
+    if (val === DECIMAL_SIGN) {
+      val = ".";
+      if (String(this.value).includes(".")) {
+        val = "";
+      }
     }
+
+    this.value = String(this.value).concat("", val);
   }
 
   turnIntoNegative() {
@@ -34,6 +42,18 @@ class CalcNumber {
 
   turnIntoPositive() {
     this.isNegative = false;
+  }
+
+  isFloat() {
+    return String(this.value).includes(".");
+  }
+
+  removeFraction() {
+    this.value = Number.parseInt(this.value, 10);
+  }
+
+  hasEmptyFraction() {
+    return /\.[0]*$/.test(String(this.value));
   }
 }
 

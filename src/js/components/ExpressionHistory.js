@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { parseExpressionStack } from "../modules/expressionStack";
 
 const ExporessionHistory = ({ expressionHistory }) => {
-  console.log("ExpressionHistory Component", { expressionHistory });
   const expressions = expressionHistory.map((exp) => {
     return parseExpressionStack(exp);
   });
