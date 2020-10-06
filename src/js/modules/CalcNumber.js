@@ -3,12 +3,40 @@
 import { DECIMAL_SIGN } from "../constants";
 
 class CalcNumber {
-  constructor(value, isNegative) {
+  constructor(value, isNegative = false, isCalculated = false) {
     if (value === DECIMAL_SIGN) {
       value = "0.";
     }
     this.value = String(value);
     this.isNegative = Boolean(isNegative);
+    this.isCalculated = isCalculated;
+  }
+  static parseInstance(item) {
+    let instanceData = item;
+    if (typeof instanceData === "string") {
+      instanceData = JSON.parse(instanceData);
+    }
+    if (typeof instanceData !== "object") {
+      console.error("Не валидный аргумент");
+      return false;
+    }
+
+    if (!instanceData.hasOwnProperty("value")) {
+      console.error("Не задано обязательное свойство value");
+      return false;
+    }
+
+    instanceData = {
+      isCalculated: false,
+      isNegative: false,
+      ...instanceData,
+    };
+
+    return new CalcNumber(
+      instanceData.value,
+      instanceData.isNegative,
+      instanceData.isCalculated
+    );
   }
 
   getString() {

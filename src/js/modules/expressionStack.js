@@ -164,11 +164,20 @@ export function parseExpressionStack(stack, toCalculate = false) {
 }
 
 export function appendInput(stack, input, isNegative) {
+  let stackContainsResult = false;
+  let prevItem = tail(stack, 1)[0];
+  const calcNumber = isCalcOperation(prevItem)
+    ? false
+    : CalcNumber.parseInstance(prevItem);
+  if (calcNumber) {
+    stackContainsResult = calcNumber.isCalculated;
+  }
+
   if (isCalcOperation(input)) {
     return appendCalcOperation(stack, input, isNegative);
   }
-
-  return appendNumber(stack, input, isNegative);
+  const newStack = stackContainsResult ? [] : stack; // после ввода нового числа, стираем результат предыдущего вычисления
+  return appendNumber(newStack, input, isNegative);
 }
 
 export function applyNegativeNumberMode(stack, mode) {
@@ -196,5 +205,5 @@ export function calculateExpression(stack) {
     calcResult = Math.abs(calcResult);
     isNegative = true;
   }
-  return [JSON.stringify(new CalcNumber(calcResult, isNegative))];
+  return [JSON.stringify(new CalcNumber(calcResult, isNegative, true))];
 }
