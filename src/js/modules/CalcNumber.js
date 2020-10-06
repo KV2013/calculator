@@ -6,16 +6,26 @@ class CalcNumber {
     this.isNegative = Boolean(isNegative);
   }
 
-  getValue() {
+  getString() {
+    let strValue = this.isNegative ? `-${this.value}` : this.value;
+    strValue = strValue.replace(".", ",");
+    return strValue;
+  }
+
+  getNumber() {
     return this.isNegative ? `-${this.value}` : this.value;
   }
+
   get val() {
     return this.getValue();
   }
 
   append(val) {
-    this.value = String(this.value).concat("", val);
-    console.log("CalcNumber.append", { val, thisValue: this.value });
+    if (val === ",") {
+      this.value = String(this.value).concat("", ".");
+    } else {
+      this.value = String(this.value).concat("", val);
+    }
   }
 
   turnIntoNegative() {

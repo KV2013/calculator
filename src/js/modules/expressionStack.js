@@ -60,7 +60,6 @@ function appendNumber(stack, input, isNegative) {
   calcNumber.append(input);
   const newStack = stack.slice(0, stack.length - 1);
   newStack.push(JSON.stringify(calcNumber));
-  console.log("expressionStack::appendNumber", { newStack, calcNumber });
   return newStack;
 }
 function isNegativeNumber(item) {
@@ -79,13 +78,17 @@ function isPlusSign(item) {
   return item === CALC_OPERATION_PLUS;
 }
 
-export function parseExpressionStack(stack) {
+export function parseExpressionStack(stack, toCalculate = false) {
   if (stack.length === 0) {
     return "0";
   }
   return stack
     .map((item, index, stack) => {
-      if (isPlusSign(item) && isNegativeNumber(stack[index + 1])) {
+      if (
+        isPlusSign(item) &&
+        stack[index + 1] &&
+        isNegativeNumber(stack[index + 1])
+      ) {
         return CALC_OPERATION_MINUS;
       }
       return item;
@@ -109,10 +112,10 @@ export function parseExpressionStack(stack) {
       let parsedItem = "";
       switch (item) {
         case CALC_OPERATION_DIVISION:
-          parsedItem = String.fromCharCode(247);
+          parsedItem = toCalculate ? "/" : String.fromCharCode(247);
           break;
         case CALC_OPERATION_MULTIPLY:
-          parsedItem = String.fromCharCode(10005);
+          parsedItem = toCalculate ? "*" : String.fromCharCode(10005);
           break;
         case CALC_OPERATION_MINUS:
           parsedItem = "-";
@@ -125,8 +128,9 @@ export function parseExpressionStack(stack) {
           let isNegative;
           ({ value, isNegative } = JSON.parse(item));
           const calcNumber = new CalcNumber(value, isNegative);
-          parsedItem = calcNumber.getValue();
-          console.log("ExpressionStack.parse", { parsedItem });
+          parsedItem = toCalculate
+            ? calcNumber.getNumber()
+            : calcNumber.getString();
       }
 
       return expressionString.concat("", parsedItem);
@@ -147,4 +151,18 @@ export function applyNegativeNumberMode(stack, mode) {
   }
 
   return appendNumber(stack, "", mode);
+}
+
+export function calculateExpression(stack) {
+  const parsedStack = parseExpressionStack(stack, true);
+  let calcResult = Function('"use strict";return (' + parsedStack + ")")();
+  if (!Number.isInteger(calcResult)) {
+    // округляем до 10-титысячных и отбрасываем лишние нули в конце
+    // Зачем?: потому-что 2.2*3 = 6.6000000000000005 а не 6.6 🤷‍♂️
+    calcResult = Number.parseFloat(calcResult).toPrecision(5);
+    calcResult = String(calcResult).replace(/[0]*$/, "");
+    calcResult = Number.parseFloat(calcResult);
+  }
+
+  return [JSON.stringify(new CalcNumber(calcResult, false))];
 }

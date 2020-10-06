@@ -25,9 +25,6 @@ const ButtonsGrid = ({
   calculateExpression,
   allClear,
 }) => {
-  const handleCalculate = () => {
-    return 0;
-  };
   const handleNegativeMode = () => {
     if (negativeNumberMode === true) {
       disableNegativeNumber();
@@ -52,7 +49,7 @@ const ButtonsGrid = ({
       handler: () => appendToExpression(CALC_OPERATION_DIVISION),
     },
     {
-      label: String.fromCharCode(10005), //  "&#10005;",
+      label: String.fromCharCode(10005), // &#10005;
       handler: () => appendToExpression(CALC_OPERATION_MULTIPLY),
     },
     {
@@ -65,7 +62,7 @@ const ButtonsGrid = ({
     },
     {
       label: "=",
-      handler: () => handleCalculate(),
+      handler: () => calculateExpression(),
     },
   ];
 

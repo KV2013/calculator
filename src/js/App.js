@@ -5,7 +5,7 @@ import ButtonsGrid from "./components/ButtonsGrid";
 
 function App() {
   return (
-    <div className="flex flex-col bg-black w-full h-full p-6 pt-10 lg:h-auto lg:max-w-sm">
+    <div className="flex flex-col bg-black w-full h-full p-6 lg:h-auto lg:max-w-sm">
       <ExpressionHistory />
       <Expression />
       <ButtonsGrid />

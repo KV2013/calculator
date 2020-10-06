@@ -1,11 +1,9 @@
 export function allClear() {
-  console.log("allClear actioni");
   return {
     type: "ALL_CLEAR",
   };
 }
 
-// TODO: remove
 export function calculateExpression() {
   return {
     type: "CALCULATE_EXPRESSION",
