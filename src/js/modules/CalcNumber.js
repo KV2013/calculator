@@ -1,6 +1,7 @@
 "use strict";
 
 import { DECIMAL_SIGN } from "../constants";
+import { isCalcOperation } from "./expressionStack";
 
 class CalcNumber {
   constructor(value, isNegative = false, isCalculated = false) {
@@ -14,13 +15,21 @@ class CalcNumber {
   static parseInstance(item) {
     let instanceData = item;
     if (typeof instanceData === "string") {
-      instanceData = JSON.parse(instanceData);
+      try {
+        instanceData = JSON.parse(instanceData);
+      } catch (e) {
+        return false;
+      }
     }
     if (typeof instanceData !== "object") {
       return false;
     }
 
     if (!instanceData.hasOwnProperty("value")) {
+      return false;
+    }
+
+    if (isCalcOperation(instanceData.value)) {
       return false;
     }
 
@@ -51,6 +60,10 @@ class CalcNumber {
   }
 
   append(val) {
+    if (!this.isValidChar(val)) {
+      return false;
+    }
+
     if (val === DECIMAL_SIGN) {
       val = ".";
       if (String(this.value).includes(".")) {
@@ -89,6 +102,18 @@ class CalcNumber {
 
   hasEmptyFraction() {
     return /\.[0]*$/.test(String(this.value));
+  }
+
+  isValidChar(val) {
+    if (val === DECIMAL_SIGN) {
+      return true;
+    }
+    // 0..9
+    if ([...Array(10).keys()].includes(Number(val))) {
+      return true;
+    }
+
+    return false;
   }
 }
 

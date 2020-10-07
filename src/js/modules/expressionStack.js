@@ -60,15 +60,6 @@ function tail(stack, len) {
   return stack.slice(start, stack.length);
 }
 
-function isCalcOperation(input) {
-  return [
-    CALC_OPERATION_MINUS,
-    CALC_OPERATION_PLUS,
-    CALC_OPERATION_MULTIPLY,
-    CALC_OPERATION_DIVISION,
-  ].includes(input);
-}
-
 function appendCalcOperation(stack, input, isNegative) {
   if (stack.length === 0) {
     return stack;
@@ -255,4 +246,13 @@ export function parseSign(sign, toCalculate = false) {
     default:
       return false;
   }
+}
+
+export function isCalcOperation(input) {
+  return [
+    CALC_OPERATION_MINUS,
+    CALC_OPERATION_PLUS,
+    CALC_OPERATION_MULTIPLY,
+    CALC_OPERATION_DIVISION,
+  ].includes(input);
 }
