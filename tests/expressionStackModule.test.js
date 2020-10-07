@@ -1,5 +1,6 @@
 import * as expressionStack from "../src/js/modules/expressionStack";
 import * as constants from "../src/js/constants";
+import CalcNumber from "../src/js/modules/CalcNumber";
 
 describe("appendInput", () => {
   test("2+2", () => {
@@ -240,4 +241,30 @@ describe("applyNegativeNumberMode", () => {
     ]);
   });
 });
-// describe("calculateExpression", () => {});
+describe("calculateExpression", () => {
+  test("14 - 77 / 2 - 3000 - 1175.5", () => {
+    const stack = [
+      JSON.stringify(CalcNumber.parseInstance({ value: 14 })),
+      constants.CALC_OPERATION_MINUS,
+      JSON.stringify(CalcNumber.parseInstance({ value: 77 })),
+      constants.CALC_OPERATION_DIVISION,
+      JSON.stringify(CalcNumber.parseInstance({ value: 2 })),
+      constants.CALC_OPERATION_MINUS,
+      JSON.stringify(CalcNumber.parseInstance({ value: 3000 })),
+      constants.CALC_OPERATION_MINUS,
+      JSON.stringify(CalcNumber.parseInstance({ value: 1175.5 })),
+    ];
+
+    const stackWithResult = expressionStack.calculateExpression(stack);
+    expect(stackWithResult.length).toBe(1);
+    expect(stackWithResult).toStrictEqual([
+      JSON.stringify(
+        CalcNumber.parseInstance({
+          value: "4200",
+          isNegative: true,
+          isCalculated: true,
+        })
+      ),
+    ]);
+  });
+});
