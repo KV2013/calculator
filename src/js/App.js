@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ExpressionHistory from "./components/ExpressionHistory";
 import Expression from "./components/Expression";
 import ButtonsGrid from "./components/ButtonsGrid";
@@ -6,13 +6,20 @@ import { EXPRESSION_SYMBOLS_PER_LINE } from "./constants";
 import SettingsBtn from "./components/SettingsBtn";
 import { connect } from "react-redux";
 import { selectCurrentTheme } from "./redux/selectors";
+import Settings from "./components/Settings";
 
 const App = ({ theme }) => {
+  const [isSettingsOpen, openSettings] = useState(false);
   const themeClasses = `${theme.backgroundColor} ${theme.borderColor}`;
-  let className = `flex flex-col w-full h-full p-6 lg:h-auto lg:max-w-sm ${themeClasses}`;
+  let className = `flex flex-col w-full h-full p-6 lg:max-h-648px lg:max-w-sm ${themeClasses}`;
+  // if (isSettingsOpen) {
+  // FIXME: REMOVE;
+  if (true) {
+    return <Settings />;
+  }
   return (
     <div className={className}>
-      <SettingsBtn />
+      <SettingsBtn clickHandler={() => openSettings(true)} />
       <ExpressionHistory />
       <Expression symbolsPerLine={EXPRESSION_SYMBOLS_PER_LINE} />
       <ButtonsGrid />

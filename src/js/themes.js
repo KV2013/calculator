@@ -73,7 +73,7 @@ const defaultThemes = [
   {
     name: "white",
     backgroundColor: "bg-gray-300",
-    borderColor: "bg-gray-300",
+    borderColor: "border-gray-300",
     expression: {
       fontColor: "text-black",
     },

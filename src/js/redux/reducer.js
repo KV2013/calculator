@@ -57,6 +57,14 @@ function rootReducer(state = initialState, action) {
         history: newExpressionHist,
         expressionStack: expressionResult,
       };
+    case "THEME_SELECTED":
+      return {
+        ...state,
+        currentTheme: action.payload.theme,
+      };
+    case "FETCH_THEMES_REQUESTED":
+    case "FETCH_THEMES_SUCCEEDED":
+    case "FETCH_THEMES_FAILD":
     default:
       return state;
   }

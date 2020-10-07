@@ -12,3 +12,7 @@ export function selectCurrentTheme(state) {
 
   return currentTheme;
 }
+
+export function selectThemes(state) {
+  return state.themes;
+}

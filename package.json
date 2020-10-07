@@ -33,7 +33,7 @@
   },
   "scripts": {
     "test": "jest",
-    "build:tailwind": "tailwindcss build src/css/tailwind.css -o src/css/main.css",
+    "build:tailwind": "tailwindcss build src/css/tailwind.css -o src/css/main.css -c ./tailwind.config.js",
     "prebuild": "npm run build:tailwind",
     "prestart": "npm run build:tailwind",
     "start": "webpack-dev-server --open --mode development",

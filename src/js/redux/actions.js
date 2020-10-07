@@ -35,3 +35,28 @@ export function appendToExpression(input) {
     payload: { input },
   };
 }
+
+export function themeSelected(theme) {
+  return {
+    type: "THEME_SELECTED",
+    payload: { theme },
+  };
+}
+
+export function fetchThemesRequested() {
+  return {
+    type: "FETCH_THEMES_REQUESTED",
+  };
+}
+
+export function fetchThemesSucceeded() {
+  return {
+    type: "FETCH_THEMES_SUCCEEDED",
+  };
+}
+
+export function fetchThemesFaild() {
+  return {
+    type: "FETCH_THEMES_FAILD",
+  };
+}

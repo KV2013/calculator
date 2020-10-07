@@ -5,7 +5,11 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      maxHeight: {
+        "648px": "648px",
+      },
+    },
   },
   variants: {
     backgroundColor: ["responsive", "hover", "focus", "active"],
