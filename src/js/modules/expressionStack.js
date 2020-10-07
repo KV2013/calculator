@@ -180,27 +180,13 @@ export function parseExpressionStack(stack, toCalculate = false) {
     })
     .reduce((expressionString, item) => {
       let parsedItem = "";
-      switch (item) {
-        case CALC_OPERATION_DIVISION:
-          parsedItem = toCalculate ? "/" : String.fromCharCode(247);
-          break;
-        case CALC_OPERATION_MULTIPLY:
-          parsedItem = toCalculate ? "*" : String.fromCharCode(10005);
-          break;
-        case CALC_OPERATION_MINUS:
-          parsedItem = "-";
-          break;
-        case CALC_OPERATION_PLUS:
-          parsedItem = "+";
-          break;
-        default:
-          let value;
-          let isNegative;
-          ({ value, isNegative } = JSON.parse(item));
-          const calcNumber = new CalcNumber(value, isNegative);
-          parsedItem = toCalculate
-            ? calcNumber.getNumber()
-            : calcNumber.getString();
+      if (isCalcOperation(item)) {
+        parsedItem = parseSign(item, toCalculate);
+      } else {
+        const calcNumber = CalcNumber.parseInstance(item);
+        parsedItem = toCalculate
+          ? calcNumber.getNumber()
+          : calcNumber.getString();
       }
 
       return expressionString.concat("", parsedItem);
@@ -247,4 +233,26 @@ export function calculateExpression(stack) {
     isNegative = true;
   }
   return [JSON.stringify(new CalcNumber(calcResult, isNegative, true))];
+}
+
+export function parseSign(sign, toCalculate = false) {
+  if (!isCalcOperation(sign)) {
+    return false;
+  }
+  switch (sign) {
+    case CALC_OPERATION_DIVISION:
+      return toCalculate ? "/" : String.fromCharCode(247);
+      break;
+    case CALC_OPERATION_MULTIPLY:
+      return toCalculate ? "*" : String.fromCharCode(10005);
+      break;
+    case CALC_OPERATION_MINUS:
+      return "-";
+      break;
+    case CALC_OPERATION_PLUS:
+      return "+";
+      break;
+    default:
+      return false;
+  }
 }
