@@ -61,7 +61,8 @@ function appendNumber(stack, input, isNegative) {
   let calcNumber;
 
   if (stack.length === 0) {
-    calcNumber = new CalcNumber(input, isNegative);
+    const val = input === "" ? 0 : input;
+    calcNumber = new CalcNumber(val, isNegative);
     const newStack = stack.slice();
     newStack.push(JSON.stringify(calcNumber));
     return newStack;

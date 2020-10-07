@@ -66,7 +66,8 @@ class CalcNumber {
   }
 
   removeLeadingZeroes(val) {
-    return val.replace(/^[0]*/, "");
+    let replacer = Number(val) === 0 ? "0" : "";
+    return val.replace(/^[0]*/, replacer);
   }
 
   turnIntoNegative() {
