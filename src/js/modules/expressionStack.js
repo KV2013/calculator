@@ -44,10 +44,6 @@ function appendCalcOperation(stack, input, isNegative) {
   prevItem = JSON.parse(prevItem);
   const calcNumber = new CalcNumber(prevItem.value, prevItem.isNegative);
 
-  console.log("ExpressionStack Module", {
-    calcNumber_hasEmptyFraction: calcNumber.hasEmptyFraction(),
-    calcNumber,
-  });
   if (calcNumber.hasEmptyFraction()) {
     calcNumber.removeFraction();
     let newStack = replaceLastItem(stack, JSON.stringify(calcNumber));
