@@ -22,7 +22,6 @@ function guardDivisionByZero(stack, input = null) {
 
   const prevItem = tail(stack, 1)[0];
   if (prevItem === CALC_OPERATION_DIVISION && String(input) === "0") {
-    console.log("guardDivisionByZero", { stack, input });
     return true;
   }
 
