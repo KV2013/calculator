@@ -140,7 +140,104 @@ describe("parseExpressionStack", () => {
     const parsedExpression = expressionStack.parseExpressionStack(stack);
     expect(parsedExpression).toBe("1" + constants.DECIMAL_SIGN + "001");
   });
+
+  test("parse 2.2 + 0.2 * 2 - 2 / 0.2", () => {
+    let stack = [];
+    let inputStream = [
+      "2",
+      constants.DECIMAL_SIGN, //
+      constants.DECIMAL_SIGN, // testing toggling decimal sign
+      constants.DECIMAL_SIGN, //
+      "2",
+      constants.CALC_OPERATION_PLUS,
+      "0",
+      constants.DECIMAL_SIGN,
+      "2",
+      constants.CALC_OPERATION_MULTIPLY,
+      "2",
+      constants.CALC_OPERATION_MINUS,
+      "2",
+      constants.CALC_OPERATION_DIVISION,
+      "0",
+      constants.DECIMAL_SIGN,
+      "2",
+    ];
+    const isNegative = false;
+    const isCalculated = false;
+
+    inputStream.forEach(
+      (input) => (stack = expressionStack.appendInput(stack, input, isNegative))
+    );
+    expect(stack.length).toBe(9);
+
+    const plusSign = expressionStack.parseSign(constants.CALC_OPERATION_PLUS);
+    const minusSign = expressionStack.parseSign(constants.CALC_OPERATION_MINUS);
+    const multiSign = expressionStack.parseSign(
+      constants.CALC_OPERATION_MULTIPLY
+    );
+    const divisionSign = expressionStack.parseSign(
+      constants.CALC_OPERATION_DIVISION
+    );
+
+    const parsedExpression = expressionStack.parseExpressionStack(stack);
+    expect(parsedExpression).toBe(
+      `2${constants.DECIMAL_SIGN}2${plusSign}0${constants.DECIMAL_SIGN}2` +
+        `${multiSign}2${minusSign}2${divisionSign}0` +
+        `${constants.DECIMAL_SIGN}2`
+    );
+  });
 });
 
-// describe("applyNegativeNumberMode", () => {});
+describe("applyNegativeNumberMode", () => {
+  test("toggle mode for single number", () => {
+    let newStack = [];
+    let mode;
+    const isNegative = false;
+    const isCalculated = false;
+    const stack = [JSON.stringify({ value: "2", isNegative, isCalculated })];
+
+    mode = constants.NEGATIVE_NUMBER_MODE_ENABLED;
+    newStack = expressionStack.applyNegativeNumberMode(stack, mode);
+    expect(newStack.length).toBe(1);
+    expect(newStack).toStrictEqual([
+      JSON.stringify({ value: "2", isNegative: true, isCalculated }),
+    ]);
+
+    mode = constants.NEGATIVE_NUMBER_MODE_DISABLED;
+    newStack = expressionStack.applyNegativeNumberMode(newStack, mode);
+    expect(newStack.length).toBe(1);
+    expect(newStack).toStrictEqual([
+      JSON.stringify({ value: "2", isNegative: false, isCalculated }),
+    ]);
+  });
+  test("toggle  mode for expression", () => {
+    let newStack = [];
+    let mode;
+
+    const isNegative = false;
+    const isCalculated = false;
+    const stack = [
+      JSON.stringify({ value: "2", isNegative, isCalculated }),
+      constants.CALC_OPERATION_PLUS,
+      JSON.stringify({ value: "2", isNegative, isCalculated }),
+    ];
+    mode = constants.NEGATIVE_NUMBER_MODE_ENABLED;
+    newStack = expressionStack.applyNegativeNumberMode(stack, mode);
+    expect(newStack.length).toBe(3);
+    expect(newStack).toStrictEqual([
+      JSON.stringify({ value: "2", isNegative: false, isCalculated }),
+      constants.CALC_OPERATION_PLUS,
+      JSON.stringify({ value: "2", isNegative: true, isCalculated }),
+    ]);
+
+    mode = constants.NEGATIVE_NUMBER_MODE_DISABLED;
+    newStack = expressionStack.applyNegativeNumberMode(newStack, mode);
+    expect(newStack.length).toBe(3);
+    expect(newStack).toStrictEqual([
+      JSON.stringify({ value: "2", isNegative: false, isCalculated }),
+      constants.CALC_OPERATION_PLUS,
+      JSON.stringify({ value: "2", isNegative: false, isCalculated }),
+    ]);
+  });
+});
 // describe("calculateExpression", () => {});
