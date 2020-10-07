@@ -43,7 +43,10 @@ function rootReducer(state = initialState, action) {
         state.history,
         state.expressionStack
       );
-      const expressionResult = calculateExpression(state.expressionStack);
+      let expressionResult = calculateExpression(state.expressionStack);
+      if (expressionResult === false) {
+        return state;
+      }
 
       return {
         ...state,

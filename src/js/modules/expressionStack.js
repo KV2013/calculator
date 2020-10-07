@@ -9,6 +9,47 @@ import {
 } from "../constants";
 import CalcNumber from "./CalcNumber";
 
+/**
+ * Return true when division by zero is atempted
+ * @param {Array} stack
+ * @param {String|null} input if null function will check last two items from stack
+ * @returns bool
+ */
+function guardDivisionByZero(stack, input = null) {
+  if (stack.length <= 1) {
+    return false;
+  }
+
+  const prevItem = tail(stack, 1)[0];
+  if (prevItem === CALC_OPERATION_DIVISION && String(input) === "0") {
+    console.log("guardDivisionByZero", { stack, input });
+    return true;
+  }
+
+  if (input === null) {
+    const lastTwoItems = tail(stack, 2);
+    if (lastTwoItems[0] === CALC_OPERATION_DIVISION) {
+      const calcNum = CalcNumber.parseInstance(lastTwoItems[1]);
+      if (calcNum.getNumber() === 0) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function isStackContainsResult(stack) {
+  let stackContainsResult = false;
+  let prevItem = tail(stack, 1)[0];
+  const calcNumber = isCalcOperation(prevItem)
+    ? false
+    : CalcNumber.parseInstance(prevItem);
+  if (calcNumber) {
+    stackContainsResult = calcNumber.isCalculated;
+  }
+}
+
 function replaceLastItem(stack, newItem) {
   const newStack = stack.slice(0, stack.length - 1);
   newStack.push(newItem);
@@ -168,19 +209,13 @@ export function parseExpressionStack(stack, toCalculate = false) {
 }
 
 export function appendInput(stack, input, isNegative) {
-  let stackContainsResult = false;
-  let prevItem = tail(stack, 1)[0];
-  const calcNumber = isCalcOperation(prevItem)
-    ? false
-    : CalcNumber.parseInstance(prevItem);
-  if (calcNumber) {
-    stackContainsResult = calcNumber.isCalculated;
+  if (guardDivisionByZero(stack, input)) {
+    return stack;
   }
-
   if (isCalcOperation(input)) {
     return appendCalcOperation(stack, input, isNegative);
   }
-  const newStack = stackContainsResult ? [] : stack; // после ввода нового числа, стираем результат предыдущего вычисления
+  const newStack = isStackContainsResult(stack) ? [] : stack; // после ввода нового числа, стираем результат предыдущего вычисления
   return appendNumber(newStack, input, isNegative);
 }
 
@@ -194,6 +229,9 @@ export function applyNegativeNumberMode(stack, mode) {
 }
 
 export function calculateExpression(stack) {
+  if (guardDivisionByZero(stack)) {
+    return false;
+  }
   const parsedStack = parseExpressionStack(stack, true);
   let calcResult = Function('"use strict";return (' + parsedStack + ")")();
   if (!Number.isInteger(calcResult)) {
