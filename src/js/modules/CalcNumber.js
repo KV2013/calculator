@@ -7,7 +7,7 @@ class CalcNumber {
     if (value === DECIMAL_SIGN) {
       value = "0.";
     }
-    this.value = Number(value);
+    this.value = String(value);
     this.isNegative = Boolean(isNegative);
     this.isCalculated = isCalculated;
   }
@@ -17,12 +17,10 @@ class CalcNumber {
       instanceData = JSON.parse(instanceData);
     }
     if (typeof instanceData !== "object") {
-      console.error("Не валидный аргумент");
       return false;
     }
 
     if (!instanceData.hasOwnProperty("value")) {
-      console.error("Не задано обязательное свойство value");
       return false;
     }
 
@@ -41,8 +39,7 @@ class CalcNumber {
 
   getString() {
     let strValue = this.isNegative ? `-${this.value}` : String(this.value);
-    strValue = strValue.replace(".", ",");
-    return strValue;
+    return strValue.replace(".", ",");
   }
 
   getNumber() {
@@ -61,7 +58,15 @@ class CalcNumber {
       }
     }
 
-    this.value = String(this.value).concat("", val);
+    let newVal = String(this.value).concat("", val);
+
+    newVal = this.removeLeadingZeroes(newVal);
+
+    this.value = newVal;
+  }
+
+  removeLeadingZeroes(val) {
+    return val.replace(/^[0]*/, "");
   }
 
   turnIntoNegative() {

@@ -100,6 +100,13 @@ function isPlusSign(item) {
   return item === CALC_OPERATION_PLUS;
 }
 
+function isMinusSign(item) {
+  if (!isCalcOperation(item)) {
+    return false;
+  }
+  return item === CALC_OPERATION_MINUS;
+}
+
 export function parseExpressionStack(stack, toCalculate = false) {
   if (stack.length === 0) {
     return "0";
@@ -113,9 +120,13 @@ export function parseExpressionStack(stack, toCalculate = false) {
       ) {
         return CALC_OPERATION_MINUS;
       }
-      return item;
-    })
-    .map((item, index, stack) => {
+      if (
+        isMinusSign(item) &&
+        stack[index + 1] &&
+        isNegativeNumber(stack[index + 1])
+      ) {
+        return CALC_OPERATION_PLUS;
+      }
       if (index >= 2 && isNegativeNumber(item)) {
         const parsedItem = JSON.parse(item);
         const calcNumber = new CalcNumber(
