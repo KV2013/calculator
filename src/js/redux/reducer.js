@@ -4,11 +4,15 @@ import {
   calculateExpression,
 } from "../modules/expressionStack";
 import { addExpression } from "../modules/expressionHistory";
+import defaultThemes from "../themes";
+import * as constants from "../constants";
 
 export const initialState = {
   expressionStack: [],
   history: [],
   negativeNumberMode: false,
+  themes: defaultThemes,
+  currentTheme: constants.DEFAULT_THEME,
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {

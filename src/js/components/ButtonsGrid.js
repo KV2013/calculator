@@ -14,9 +14,11 @@ import {
   disableNegativeNumber,
   enableNegativeNumber,
 } from "../redux/actions";
+import { selectCurrentTheme } from "../redux/selectors";
 import Btn from "./Btn";
 
 const ButtonsGrid = ({
+  theme,
   negativeNumberMode,
   appendToExpression,
   enableNegativeNumber,
@@ -68,13 +70,11 @@ const ButtonsGrid = ({
 
   return (
     <div id="buttons" className="grid grid-cols-4 grid-rows-5 flex-grow">
-      <ul className="grid grid-rows-1 grid-cols-3 text-white col-start-1 col-end-4 gap-y-4">
+      <ul className="grid grid-rows-1 grid-cols-3 col-start-1 col-end-4 gap-y-4">
         {modeButtons.map((buttonConf, index) => {
-          let bgClassess =
-            "bg-gray-400 text-black hover:bg-gray-300 active:bg-gray-500";
+          let bgClassess = `${theme.systemButtons.backgroundColor} ${theme.systemButtons.fontColor} ${theme.systemButtons.hover.backgroundColor} ${theme.systemButtons.active.backgroundColor}`;
           if (buttonConf.label === "+/-" && negativeNumberMode === true) {
-            bgClassess =
-              "bg-teal-400 text-black hover:bg-teal-300 active:bg-teal-500";
+            bgClassess = `${theme.systemButtonsActive.backgroundColor} ${theme.systemButtonsActive.fontColor} ${theme.systemButtonsActive.hover.backgroundColor} ${theme.systemButtonsActive.active.backgroundColor}`;
           }
           const cname = `flex justify-center items-center w-16 h-16 text-4xl rounded-full focus:outline-none focus:shadow-outline ${bgClassess}`;
           return (
@@ -86,18 +86,19 @@ const ButtonsGrid = ({
           );
         })}
       </ul>
-      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4 text-white ">
+      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4">
         {numberButtons.map((buttonLabel, index) => {
           let liClassName = "flex justify-center items-center";
+          let btnThemeClasses = `${theme.numberButtons.fontColor} ${theme.numberButtons.backgroundColor} ${theme.numberButtons.hover.backgroundColor} ${theme.numberButtons.active.backgroundColor}`;
           let btnCName =
-            "flex justify-center items-center w-16 h-16 text-4xl rounded-full bg-gray-800" +
-            " focus:outline-none focus:shadow-outline hover:bg-gray-700 active:bg-gray-900";
+            `flex justify-center items-center w-16 h-16 text-4xl rounded-full ` +
+            ` focus:outline-none focus:shadow-outline ${btnThemeClasses}`;
           if (buttonLabel === 0) {
             liClassName =
               "flex justify-center items-center col-start-1 col-end-3 px-2";
             btnCName =
-              "flex justify-start items-center pl-8 w-full h-16 text-4xl rounded-full bg-gray-800" +
-              " focus:outline-none focus:shadow-outline hover:bg-gray-700 active:bg-gray-900";
+              "flex justify-start items-center pl-8 w-full h-16 text-4xl rounded-full" +
+              ` focus:outline-none focus:shadow-outline ${btnThemeClasses}`;
           }
           return (
             <li key={index} className={liClassName}>
@@ -111,15 +112,13 @@ const ButtonsGrid = ({
           );
         })}
       </ul>
-      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 text-white ">
+      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 ">
         {operationButtons.map((buttonConf, index) => {
           const label = buttonConf.label;
+          const operBtnCName = `flex justify-center items-center w-16 h-16 text-4xl rounded-full focus:outline-none focus:shadow-outline ${theme.operationsButtons.fontColor} ${theme.operationsButtons.backgroundColor} ${theme.operationsButtons.hover.backgroundColor} ${theme.operationsButtons.active.backgroundColor}`;
           return (
             <li key={index} className="flex justify-end items-center">
-              <Btn
-                cname="flex justify-center items-center w-16 h-16 text-4xl rounded-full focus:outline-none focus:shadow-outline bg-orange-400 hover:bg-orange-300 active:bg-orange-500"
-                clickHandler={buttonConf.handler}
-              >
+              <Btn cname={operBtnCName} clickHandler={buttonConf.handler}>
                 {label}
               </Btn>
             </li>
@@ -131,7 +130,11 @@ const ButtonsGrid = ({
 };
 
 const mapStateToProps = (state) => {
-  return { negativeNumberMode: state.negativeNumberMode };
+  const currentTheme = selectCurrentTheme(state);
+  return {
+    theme: currentTheme,
+    negativeNumberMode: state.negativeNumberMode,
+  };
 };
 
 export default connect(mapStateToProps, {

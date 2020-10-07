@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { parseExpressionStack } from "../modules/expressionStack";
+import { selectCurrentTheme } from "../redux/selectors";
 
-const ExporessionHistory = ({ expressionHistory }) => {
+const ExporessionHistory = ({ theme, expressionHistory }) => {
   const expressions = expressionHistory.map((exp) => {
     return parseExpressionStack(exp);
   });
+  const className = `h-16 text-right ${theme.history.fontColor}`;
   return (
-    <div id="history" className="h-16 text-right text-white">
+    <div id="history" className={className}>
       <ul className="h-full">
         {expressions.map((exp, index) => {
           return (
@@ -22,6 +24,7 @@ const ExporessionHistory = ({ expressionHistory }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { expressionHistory: state.history };
+  const currentTheme = selectCurrentTheme(state);
+  return { theme: currentTheme, expressionHistory: state.history };
 };
 export default connect(mapStateToProps)(ExporessionHistory);
