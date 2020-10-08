@@ -12,10 +12,8 @@ const App = ({ theme }) => {
   const [isSettingsOpen, openSettings] = useState(false);
   const themeClasses = `${theme.backgroundColor} ${theme.borderColor}`;
   let className = `flex flex-col w-full h-full p-6 lg:max-h-648px lg:max-w-sm ${themeClasses}`;
-  // if (isSettingsOpen) {
-  // FIXME: REMOVE;
-  if (true) {
-    return <Settings />;
+  if (isSettingsOpen) {
+    return <Settings closeSettings={() => openSettings(false)} />;
   }
   return (
     <div className={className}>

@@ -20,6 +20,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...initialState,
         history: state.history,
+        themes: state.themes,
+        currentTheme: state.currentTheme,
       };
     case "NEGATIVE_NUMBER_MODE_ENABLED":
       return updateNegativeNumberMode(state, true);

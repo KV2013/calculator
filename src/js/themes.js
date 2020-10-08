@@ -58,7 +58,7 @@ const defaultThemes = [
       },
     },
     settingsButton: {
-      backgroundColor: "bg-gray-900",
+      backgroundColor: "bg-black",
       fontColor: "text-white",
       hover: {
         backgroundColor: "hover:bg-gray-800",
@@ -129,8 +129,8 @@ const defaultThemes = [
       },
     },
     settingsButton: {
-      backgroundColor: "bg-gray-900",
-      fontColor: "text-white",
+      backgroundColor: "bg-gray-300",
+      fontColor: "text-black",
       hover: {
         backgroundColor: "hover:bg-gray-800",
         fontColor: "hover:text-white",

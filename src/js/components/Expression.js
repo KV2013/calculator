@@ -13,7 +13,6 @@ const Expression = ({ theme, symbolsPerLine, expressionStack }) => {
     ];
   }
 
-  console.log("Expression Component", { theme });
   const themeClasses = `${theme.expression.fontColor}`;
   return (
     <div id="calculation" className="h-32 flex flex-col pb-4 text-right">
