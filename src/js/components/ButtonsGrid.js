@@ -71,36 +71,36 @@ const ButtonsGrid = ({
   return (
     <div
       id="buttons"
-      className="grid grid-cols-4 grid-rows-5 flex-grow mb-16 mx-6"
+      className="grid grid-cols-4 grid-rows-5 flex-grow mb-16 mx-2 sm:gap-y-2"
     >
-      <ul className="grid grid-rows-1 grid-cols-3 col-start-1 col-end-4 gap-2">
+      <ul className="grid grid-rows-1 grid-cols-3 col-start-1 col-end-4 gap-0">
         {modeButtons.map((buttonConf, index) => {
           let bgClassess = `${theme.systemButtons.backgroundColor} ${theme.systemButtons.fontColor} ${theme.systemButtons.hover.backgroundColor} ${theme.systemButtons.active.backgroundColor}`;
           if (buttonConf.label === "+/-" && negativeNumberMode === true) {
             bgClassess = `${theme.systemButtonsActive.backgroundColor} ${theme.systemButtonsActive.fontColor} ${theme.systemButtonsActive.hover.backgroundColor} ${theme.systemButtonsActive.active.backgroundColor}`;
           }
-          const cname = `flex justify-center items-center w-10 h-10 text-xl rounded-full focus:outline-none focus:shadow-outline ${bgClassess}`;
+          const modeCName = `flex justify-center items-center text-2xl w-16 h-16 rounded-full md:w-16 md:h-16 sm:w-10 sm:h-10 md:text-4xl focus:outline-none focus:shadow-outline ${bgClassess}`;
           return (
             <li key={index} className="flex justify-center items-center">
-              <Btn cname={cname} clickHandler={buttonConf.handler}>
+              <Btn cname={modeCName} clickHandler={buttonConf.handler}>
                 {buttonConf.label}
               </Btn>
             </li>
           );
         })}
       </ul>
-      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-3">
+      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-0">
         {numberButtons.map((buttonLabel, index) => {
           let liClassName = "flex justify-center items-center";
           let btnThemeClasses = `${theme.numberButtons.fontColor} ${theme.numberButtons.backgroundColor} ${theme.numberButtons.hover.backgroundColor} ${theme.numberButtons.active.backgroundColor}`;
           let btnCName =
-            `flex justify-center items-center w-10 h-10 text-xl rounded-full ` +
+            `flex justify-center items-center w-16 h-16 md:w-16 md:h-16 sm:w-10 sm:h-10 text-2xl md:text-4xl rounded-full ` +
             ` focus:outline-none focus:shadow-outline ${btnThemeClasses}`;
           if (buttonLabel === 0) {
             liClassName =
               "flex justify-center items-center col-start-1 col-end-3 px-2";
             btnCName =
-              "flex justify-start items-center pl-8 w-48 h-10 text-xl rounded-full" +
+              "flex justify-start items-center pl-8 w-48 h-16 text-2xl rounded-full md:h-16 sm:h-10 sm:text-xl md:text-4xl" +
               ` focus:outline-none focus:shadow-outline ${btnThemeClasses}`;
           }
           return (
@@ -115,10 +115,10 @@ const ButtonsGrid = ({
           );
         })}
       </ul>
-      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-2 ">
+      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-0 ">
         {operationButtons.map((buttonConf, index) => {
           const label = buttonConf.label;
-          const operBtnCName = `flex justify-center items-center w-10 h-10 text-xl rounded-full focus:outline-none focus:shadow-outline ${theme.operationsButtons.fontColor} ${theme.operationsButtons.backgroundColor} ${theme.operationsButtons.hover.backgroundColor} ${theme.operationsButtons.active.backgroundColor}`;
+          const operBtnCName = `flex justify-center items-center w-16 h-16 md:w-16 md:h-16 sm:w-10 sm:h-10 sm:text-xl rounded-full text-2xl md:text-4xl focus:outline-none focus:shadow-outline ${theme.operationsButtons.fontColor} ${theme.operationsButtons.backgroundColor} ${theme.operationsButtons.hover.backgroundColor} ${theme.operationsButtons.active.backgroundColor}`;
           return (
             <li key={index} className="flex justify-end items-center">
               <Btn cname={operBtnCName} clickHandler={buttonConf.handler}>

@@ -6,20 +6,16 @@ import { selectCurrentTheme } from "../redux/selectors";
 const Expression = ({ theme, symbolsPerLine, expressionStack }) => {
   const expressionString = parseExpressionStack(expressionStack);
   let expStringArr = [expressionString];
-  if (expressionString.length > symbolsPerLine) {
-    expStringArr = [
-      expressionString.slice(0, expressionString.length - symbolsPerLine),
-      expressionString.slice(-symbolsPerLine),
-    ];
-  }
-
   const themeClasses = `${theme.expression.fontColor}`;
   return (
-    <div id="calculation" className=" flex flex-col pb-4 text-right h-20">
+    <div
+      id="calculation"
+      className=" flex flex-col sm:pb-0 pb-4 text-right h-20"
+    >
       {expStringArr.map((exp, index, arr) => {
-        let fontClass = " text-4xl ";
+        let fontClass = " text-6xl md:text-6xl sm:text-base";
         if (arr.length > 1 && index < arr.length - 1) {
-          fontClass = " text-xl ";
+          fontClass = " text-xl sm:text-base";
         }
         const className = `flex-auto flex items-end justify-end leading-none overflow-hidden ${fontClass} ${themeClasses}`;
         return (
