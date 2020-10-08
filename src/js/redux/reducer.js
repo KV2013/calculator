@@ -11,8 +11,10 @@ export const initialState = {
   expressionStack: [],
   history: [],
   negativeNumberMode: false,
-  themes: defaultThemes,
+  defaultThemes: defaultThemes,
+  fetchedThemes: [],
   currentTheme: constants.DEFAULT_THEME,
+  themeRequestError: null,
 };
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -20,7 +22,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...initialState,
         history: state.history,
-        themes: state.themes,
+        defaultThemes: state.defaultThemes,
+        fetchedThemes: state.fetchedThemes,
         currentTheme: state.currentTheme,
       };
     case "NEGATIVE_NUMBER_MODE_ENABLED":
@@ -65,8 +68,24 @@ function rootReducer(state = initialState, action) {
         currentTheme: action.payload.theme,
       };
     case "FETCH_THEMES_REQUESTED":
+      return {
+        ...state,
+        fetchedThemes: [],
+        themeRequestError: null,
+      };
     case "FETCH_THEMES_SUCCEEDED":
+      const newThemes = [{ name: "teal" }];
+      return {
+        ...state,
+        fetchedThemes: newThemes,
+        themeRequestError: null,
+      };
     case "FETCH_THEMES_FAILD":
+      return {
+        ...state,
+        fetchedThemes: [],
+        themeRequestError: action.error.message,
+      };
     default:
       return state;
   }

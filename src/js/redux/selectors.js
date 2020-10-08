@@ -1,10 +1,15 @@
 const { DEFAULT_THEME } = require("../constants");
 
 export function selectCurrentTheme(state) {
-  const themes = state.themes;
+  const defaultThemes = state.defaultThemes;
+  const fetchedThemes = state.fetchedThemes;
   const currentThemeName = state.currentTheme;
-  const defaultTheme = themes.find((t) => t.name === DEFAULT_THEME);
-  const currentTheme = themes.find((t) => t.name === currentThemeName);
+  const defaultTheme = defaultThemes.find((t) => t.name === DEFAULT_THEME);
+  let currentTheme = defaultThemes.find((t) => t.name === currentThemeName);
+
+  if (!currentTheme) {
+    currentTheme = fetchedThemes.find((t) => t.name === currentThemeName);
+  }
 
   if (!currentTheme) {
     return defaultTheme;
@@ -13,6 +18,10 @@ export function selectCurrentTheme(state) {
   return currentTheme;
 }
 
-export function selectThemes(state) {
-  return state.themes;
+export function selectDefaultThemes(state) {
+  return state.defaultThemes;
+}
+
+export function selectFetchedThemes(state) {
+  return state.fetchedThemes;
 }
