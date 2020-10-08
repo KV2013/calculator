@@ -74,10 +74,9 @@ function rootReducer(state = initialState, action) {
         themeRequestError: null,
       };
     case "FETCH_THEMES_SUCCEEDED":
-      const newThemes = [{ name: "teal" }];
       return {
         ...state,
-        fetchedThemes: newThemes,
+        fetchedThemes: action.payload.themes,
         themeRequestError: null,
       };
     case "FETCH_THEMES_FAILD":
