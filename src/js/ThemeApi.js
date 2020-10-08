@@ -5,6 +5,5 @@ export async function fetchThemes() {
   const response = await fetch(`${BASE_URL}${GET_THEMES_ROUTE}`);
   const responseJson = await response.json();
 
-  console.log("API fetchThemes", { responseJson });
   return responseJson.data;
 }

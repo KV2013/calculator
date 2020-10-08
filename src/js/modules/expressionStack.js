@@ -139,7 +139,7 @@ export function parseExpressionStack(stack, toCalculate = false) {
   if (stack.length === 0) {
     return "0";
   }
-  return stack
+  let parseResult = stack
     .map((item, index, stack) => {
       if (
         isPlusSign(item) &&
@@ -155,14 +155,10 @@ export function parseExpressionStack(stack, toCalculate = false) {
       ) {
         return CALC_OPERATION_PLUS;
       }
-      if (index >= 2 && isNegativeNumber(item)) {
-        const parsedItem = JSON.parse(item);
-        const calcNumber = new CalcNumber(
-          parsedItem.value,
-          parsedItem.isNegative
-        );
+      if (stack[index - 1] && isNegativeNumber(item)) {
         const prevItem = stack[index - 1];
         if (prevItem === CALC_OPERATION_MINUS) {
+          const calcNumber = CalcNumber.parseInstance(item);
           calcNumber.turnIntoPositive();
           return JSON.stringify(calcNumber);
         }
@@ -182,6 +178,10 @@ export function parseExpressionStack(stack, toCalculate = false) {
 
       return expressionString.concat("", parsedItem);
     }, "");
+
+  parseResult = parseResult.replace("--", "-"); // TODO: переделать костыль
+
+  return parseResult;
 }
 
 export function appendInput(stack, input, isNegative) {

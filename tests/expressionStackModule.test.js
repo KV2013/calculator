@@ -187,6 +187,28 @@ describe("parseExpressionStack", () => {
         `${constants.DECIMAL_SIGN}2`
     );
   });
+
+  test.only("add negative number", () => {
+    let stack = [
+      JSON.stringify(new CalcNumber("5")),
+      constants.CALC_OPERATION_PLUS,
+      JSON.stringify(new CalcNumber("6", true)),
+    ];
+    const parsedExpression = expressionStack.parseExpressionStack(stack);
+    const minusSign = expressionStack.parseSign(constants.CALC_OPERATION_MINUS);
+    expect(parsedExpression).toBe(`5${minusSign}6`);
+  });
+
+  test("5 - (-6)", () => {
+    let stack = [
+      JSON.stringify(new CalcNumber("5")),
+      constants.CALC_OPERATION_MINUS,
+      JSON.stringify(new CalcNumber("6", true)),
+    ];
+    const parsedExpression = expressionStack.parseExpressionStack(stack);
+    const plusSign = expressionStack.parseSign(constants.CALC_OPERATION_PLUS);
+    expect(parsedExpression).toBe(`5${plusSign}6`);
+  });
 });
 
 describe("applyNegativeNumberMode", () => {
