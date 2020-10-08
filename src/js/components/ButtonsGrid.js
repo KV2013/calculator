@@ -70,7 +70,7 @@ const ButtonsGrid = ({
 
   return (
     <div id="buttons" className="grid grid-cols-4 grid-rows-5 flex-grow">
-      <ul className="grid grid-rows-1 grid-cols-3 col-start-1 col-end-4 gap-y-4">
+      <ul className="grid grid-rows-1 grid-cols-3 col-start-1 col-end-4 gap-y-2">
         {modeButtons.map((buttonConf, index) => {
           let bgClassess = `${theme.systemButtons.backgroundColor} ${theme.systemButtons.fontColor} ${theme.systemButtons.hover.backgroundColor} ${theme.systemButtons.active.backgroundColor}`;
           if (buttonConf.label === "+/-" && negativeNumberMode === true) {
@@ -86,7 +86,7 @@ const ButtonsGrid = ({
           );
         })}
       </ul>
-      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-4">
+      <ul className="grid grid-cols-3 row-start-2 row-end-6 col-start-1 col-end-4 gap-y-3">
         {numberButtons.map((buttonLabel, index) => {
           let liClassName = "flex justify-center items-center";
           let btnThemeClasses = `${theme.numberButtons.fontColor} ${theme.numberButtons.backgroundColor} ${theme.numberButtons.hover.backgroundColor} ${theme.numberButtons.active.backgroundColor}`;
@@ -112,7 +112,7 @@ const ButtonsGrid = ({
           );
         })}
       </ul>
-      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-4 ">
+      <ul className="grid grid-cols-1 grid-rows-5 row-start-1 row-end-6 gap-y-2 ">
         {operationButtons.map((buttonConf, index) => {
           const label = buttonConf.label;
           const operBtnCName = `flex justify-center items-center w-16 h-16 text-4xl rounded-full focus:outline-none focus:shadow-outline ${theme.operationsButtons.fontColor} ${theme.operationsButtons.backgroundColor} ${theme.operationsButtons.hover.backgroundColor} ${theme.operationsButtons.active.backgroundColor}`;

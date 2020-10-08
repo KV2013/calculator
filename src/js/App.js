@@ -11,7 +11,7 @@ import Settings from "./components/Settings";
 const App = ({ theme }) => {
   const [isSettingsOpen, openSettings] = useState(false);
   const themeClasses = `${theme.backgroundColor} ${theme.borderColor}`;
-  let className = `flex flex-col w-full h-full px-4 pt-6 pb-16 lg:max-h-648px lg:max-w-sm ${themeClasses}`;
+  let className = `flex flex-col w-full h-full px-4 pt-2 pb-20 lg:max-h-648px lg:max-w-sm ${themeClasses}`;
   if (isSettingsOpen) {
     return <Settings closeSettings={() => openSettings(false)} />;
   }
