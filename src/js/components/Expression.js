@@ -15,11 +15,11 @@ const Expression = ({ theme, symbolsPerLine, expressionStack }) => {
 
   const themeClasses = `${theme.expression.fontColor}`;
   return (
-    <div id="calculation" className="h-32 flex flex-col pb-4 text-right">
+    <div id="calculation" className=" flex flex-col pb-4 text-right h-20">
       {expStringArr.map((exp, index, arr) => {
-        let fontClass = " text-6xl ";
+        let fontClass = " text-4xl ";
         if (arr.length > 1 && index < arr.length - 1) {
-          fontClass = " text-4xl ";
+          fontClass = " text-xl ";
         }
         const className = `flex-auto flex items-end justify-end leading-none overflow-hidden ${fontClass} ${themeClasses}`;
         return (

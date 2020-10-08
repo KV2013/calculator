@@ -7,7 +7,7 @@ const ExporessionHistory = ({ theme, expressionHistory }) => {
   const expressions = expressionHistory.map((exp) => {
     return parseExpressionStack(exp);
   });
-  const className = `h-16 text-right ${theme.history.fontColor}`;
+  const className = `h-16 text-right flex items-end justify-end ${theme.history.fontColor}`;
   return (
     <div id="history" className={className}>
       <ul className="h-full">
